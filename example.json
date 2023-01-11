@@ -1,0 +1,19 @@
+{
+    "status": {
+        "emoji": 1628097
+    },
+    "config": {
+        "GuildedAPI": {
+            "content-type": "application/json",
+            "accept": "application/json, text/javascript, */*; q=0.01",
+            "cookie": "",
+            "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+        },
+        "SpotifyAPI": {
+            "redirect": "http://localhost",
+            "client": "",
+            "secret": "",
+            "scopes": "user-read-playback-state"
+        }
+    }
+}
