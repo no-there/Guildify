@@ -14,7 +14,7 @@ def get_current_track(spotify):
 
     track = spotify.current_user_playing_track()
 
-    if track["is_playing"] == False:
+    if track == None or track["is_playing"] == False:
         return None 
 
     return {
@@ -43,10 +43,13 @@ def get_track_data(spotify, track):
 def set_status(track): 
     # set track as status
 
+    global pause # i know this is bad but i dont care
+
     url = "https://www.guilded.gg/api/users/me/status"
 
     if track is None:
         payload = json.dumps({})
+        pause = True
     else:
         payload = json.dumps({
             "content": {
@@ -75,12 +78,16 @@ def set_status(track):
 
     response = requests.request("POST", url, headers=config["config"]["GuildedAPI"], data=payload)
 
+
     if response.status_code != 200:
-        print(f"\t❌ Failed to update status")
+        print(f"\t ❌ Failed to update status - Check your token. (Code: {response.status_code})")
         print(response.text)
         exit()
 
 if __name__ == "__main__":
+
+    pause = False
+
     while True:
         os.system("cls" if os.name == "nt" else "clear")
 
@@ -103,9 +110,10 @@ if __name__ == "__main__":
         else:
             print("\n\t 🎵 Nothing currently playing")
 
-        set_status(track)
+        if pause == False or track is not None:
+            set_status(track)
 
-        timer = int(track["reset"] / 1000) if track is not None else 10
+        timer = int(track["reset"] / 1000) if track is not None else 15
 
         for i in range(int(timer)):
             timer = timer - 1
