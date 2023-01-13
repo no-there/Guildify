@@ -116,6 +116,7 @@ if __name__ == "__main__":
 
         # loop timer to update terminal screen
         for i in range(int(timer)):
+            timer -= 1 
             print(f"\t ⌛ Resync in {datetime.timedelta(seconds=round(timer))}", end="\r", flush=True) # convert seconds to hours, minutes & seconds
             # wait 1.1s on last second to prevent capturing the same track
             time.sleep(1 if timer > 1 else 1.1)
